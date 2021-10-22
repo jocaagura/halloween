@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import 'blocs/bloc_central.dart';
@@ -18,13 +17,10 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   late BlocCentral _blocCentral;
 
-
   @override
   void initState() {
     super.initState();
     _blocCentral = blocCentral;
-
-
   }
 
   @override
@@ -45,5 +41,4 @@ class _MyAppState extends State<MyApp> {
           );
         });
   }
-
 }

@@ -1,4 +1,5 @@
 import '../entities.dart';
+import 'bloc_sesion.dart';
 import 'bloc_size_screen.dart';
 import 'bloc_theme.dart';
 
@@ -7,6 +8,7 @@ class BlocCentral extends Bloc {
   /// this bloc only can be intanciated once in the app
   final theme = BlocTheme();
   final size = BlocSize();
+  final sesion = BlocSesion();
 }
 
 final blocCentral = BlocCentral();
