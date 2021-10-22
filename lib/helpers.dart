@@ -11,3 +11,6 @@ bool validarEmail(String email) {
   return false;
 }
 
+double returnMinDouble(double num1, double num2) {
+  return num1 < num2 ? num1 : num2;
+}
