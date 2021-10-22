@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import '../entities.dart';
 
 class BlocTheme extends Bloc {
-  final ThemeData _themeData = ThemeData(primarySwatch: Colors.purple);
+  final ThemeData _themeData =
+      ThemeData(primarySwatch: Colors.purple, fontFamily: "Poppins");
   final kColors = const <Color>[
     Color.fromRGBO(14, 6, 20, 1.0),
     Color.fromRGBO(47, 25, 79, 1.0),
