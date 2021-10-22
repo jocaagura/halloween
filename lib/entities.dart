@@ -22,26 +22,34 @@ abstract class Bloc {
     return _streamControllers[key] as Stream<T>?;
   }
 
-  dynamic getValue(String key) {
-    _streamControllers[key]?.valueOrNull;
+  T? getValue<T>(String key) {
+    final _controller = _streamControllers[key];
+    T? response;
+    if (_controller != null) {
+      response = _controller.valueOrNull as T;
+    }
+
+    return response;
   }
 
   setValue<T>(String key, T value) {
-    if(!_streamControllers.containsKey(key)){
+    if (!_streamControllers.containsKey(key)) {
       addStreamController(key, value);
-    }else if (_streamControllers[key] != null) {
+    } else if (_streamControllers[key] != null) {
       _streamControllers[key]?.sink.add(value);
     }
   }
+
   setError(String key, String errorMessage) {
     if (_streamControllers[key] != null) {
       _streamControllers[key]?.addError(errorMessage);
     }
   }
 
-  String? getError(String key){
+  String? getError(String key) {
     return _streamControllers[key]?.error.toString();
   }
+
   dispose() {
     if (_streamControllers.isNotEmpty) {
       _streamControllers.forEach((key, value) {

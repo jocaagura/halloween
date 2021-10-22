@@ -5,6 +5,7 @@ import '../../helpers.dart';
 import '../widgets/image_asset_positioned_widget.dart';
 import '../widgets/input_email_widget.dart';
 import '../widgets/responsive_widget.dart';
+import 'instructions_page.dart';
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -13,6 +14,19 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return const ResponsiveWidget(
         mobileWidget: _MobileVersion(), desktopWidget: _DesktopVersion());
+  }
+}
+
+class _MobileVersion extends StatelessWidget {
+  const _MobileVersion({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Text("Movil"),
+    );
   }
 }
 
@@ -72,7 +86,8 @@ class _DesktopVersion extends StatelessWidget {
                         width: width * 0.49,
                         height: height * 0.9,
                         alignment: Alignment.center,
-                        padding: EdgeInsets.symmetric(horizontal: sizeFont *1.8),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: sizeFont * 1.8),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -87,7 +102,11 @@ class _DesktopVersion extends StatelessWidget {
                                   return ElevatedButton(
                                       onPressed: validarEmail(_email)
                                           ? () {
-                                              print(_email);
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          InstructionsPage()));
                                             }
                                           : null,
                                       child: const Text("Siguiente"));
@@ -105,19 +124,6 @@ class _DesktopVersion extends StatelessWidget {
         ImageAssetPositionedWidget(
             sizeAsset: sizeMoon, top: top, left: left, assetImage: assetMoon)
       ],
-    );
-  }
-}
-
-class _MobileVersion extends StatelessWidget {
-  const _MobileVersion({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text("Movil"),
     );
   }
 }
