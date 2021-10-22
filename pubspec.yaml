@@ -16,7 +16,7 @@ dependencies:
   share_plus: ^3.0.4
   youtube_player_iframe: ^2.2.2
   camera: ^0.9.4+3
-  camera_web: ^0.2.1+1
+
 
 dev_dependencies:
   flutter_test:
