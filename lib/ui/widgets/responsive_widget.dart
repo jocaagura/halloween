@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:halloween/ui/widgets/background_widget.dart';
-import '../../data_types.dart';
 
 import '../../blocs/bloc_central.dart';
+import '../../data_types.dart';
+import 'background_widget.dart';
 
 class ResponsiveWidget extends StatelessWidget {
   const ResponsiveWidget(
@@ -16,15 +16,14 @@ class ResponsiveWidget extends StatelessWidget {
     /// set the size of screen to another responsive widgets
 
     return Scaffold(
-      body: Stack(
-        children: [
-          const BackgroundWidget(),
-          blocCentral.size.screenType(MediaQuery.of(context).size.width) == ScreenType.mobile
-              ? mobileWidget
-              : desktopWidget,
-
-        ],
-      )
-    );
+        body: Stack(
+      children: [
+        const BackgroundWidget(),
+        blocCentral.size.screenType(MediaQuery.of(context).size.width) ==
+                ScreenType.mobile
+            ? mobileWidget
+            : desktopWidget,
+      ],
+    ));
   }
 }
