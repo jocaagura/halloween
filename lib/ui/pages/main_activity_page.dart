@@ -23,8 +23,52 @@ class _MobileVersion extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(blocCentral.sesion.sesionEmail),
+    final size = MediaQuery.of(context).size;
+    final double width = (size.width).clamp(100, 400);
+    final double height = size.height * 0.5;
+
+    /// sizes of assets
+    final minBaseNumber = returnMinDouble(size.width, size.height);
+    final sizeAsset = minBaseNumber * 0.25;
+    final sizeAsset2 = sizeAsset * 1.45;
+    const String assetImage = "assets/4.png";
+    const String assetImage2 = "assets/3.png";
+    final double top = size.height * 0.015;
+    final double left = size.width * 0.5 - (sizeAsset * 0.5);
+    final double left2 = size.width * 0.5 - (sizeAsset2 * 0.5);
+    return Stack(
+      children: [
+        Center(
+          child: Container(
+            alignment: Alignment.center,
+            width: width,
+            height: height,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20.0),
+                border: Border.all(
+                  color: Theme.of(context).canvasColor,
+                  width: 2.0,
+                )),
+            child: InkWell(
+                onTap: () {
+                  blocCentral.router
+                      .routeTo(context, const FinishActivityPage());
+                },
+                child: const Text("Aqui reproducimos el video")),
+          ),
+        ),
+
+        /// SpiderWeb
+        ImageAssetPositionedWidget(
+            sizeAsset: sizeAsset,
+            top: top,
+            left: left,
+            assetImage: assetImage2),
+
+        /// Spider
+        ImageAssetPositionedWidget(
+            sizeAsset: sizeAsset2, top: top, left: left2, assetImage: assetImage),
+      ],
     );
   }
 }
@@ -80,7 +124,7 @@ class _DesktopVersion extends StatelessWidget {
 
         /// Spider
         ImageAssetPositionedWidget(
-            sizeAsset: sizeAsset, top: top, left: left, assetImage: assetImage),
+            sizeAsset: sizeAsset, top: top * 2, left: left, assetImage: assetImage),
       ],
     );
   }

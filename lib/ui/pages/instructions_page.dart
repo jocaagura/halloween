@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'main_activity_page.dart';
 
 import '../../blocs/bloc_central.dart';
 import '../../helpers.dart';
 import '../widgets/image_asset_positioned_widget.dart';
 import '../widgets/responsive_widget.dart';
+import 'main_activity_page.dart';
 
 class InstructionsPage extends StatelessWidget {
   const InstructionsPage({Key? key}) : super(key: key);
@@ -23,8 +23,111 @@ class _MobileVersion extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(blocCentral.sesion.sesionEmail),
+    final size = MediaQuery.of(context).size;
+    final double width = (size.width).clamp(100, 320);
+    final double width2 = width * 0.65;
+    final double height = size.height * 0.7;
+    final double sizeFont = (size.width * 0.035).clamp(8, 30);
+    final double sizeFont2 = (size.width * 0.025).clamp(8, 26);
+
+    /// sizes of assets
+    final minBaseNumber = returnMinDouble(size.width, size.height);
+    final sizeAsset = minBaseNumber * 0.35;
+    const String assetImage = "assets/5.png";
+    final double top = size.height * 0.0075;
+    final double left = size.width * 0.5 - (sizeAsset * 0.5);
+    final TextStyle style =
+        TextStyle(fontSize: sizeFont2, color: blocCentral.theme.kColors.last);
+    return Stack(
+      children: [
+        Center(
+          child: Container(
+            alignment: Alignment.center,
+            width: width,
+            height: height,
+            padding: EdgeInsets.all(sizeFont * 0.8),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20.0),
+                border: Border.all(
+                  color: Theme.of(context).canvasColor,
+                  width: 2.0,
+                )),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Container(),
+                Container(
+                  width: width * 0.7,
+                  height: height * 0.35,
+                  alignment: Alignment.center,
+                  child: Image.asset(
+                    "assets/9.png",
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                SizedBox(
+                  width: width2,
+                  child: Text(
+                    "1. Asegurate de darnos los permisos de camára en tu navegador para poder jugar.",
+                    style: style,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                const SizedBox(
+                  height: 5.0,
+                ),
+                SizedBox(
+                  width: width2,
+                  child: Text(
+                    "2. Cuando estes listo presiona continuar.",
+                    style: style,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                const SizedBox(
+                  height: 5.0,
+                ),
+                SizedBox(
+                  width: width2,
+                  child: Text(
+                    "3. No necesitas más instrucciones solo sigue tu instinto.",
+                    style: style,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                const SizedBox(
+                  height: 5.0,
+                ),
+                const SizedBox(
+                  height: 10.0,
+                ),
+                StreamBuilder<String>(
+                    stream: blocCentral.sesion.sesionEmailStream,
+                    builder: (context, snapshot) {
+                      String _email = snapshot.data ?? "";
+                      return ElevatedButton(
+                          onPressed: validarEmail(_email)
+                              ? () {
+                                  if (blocCentral.camera.isCameraGranted) {
+                                    blocCentral.router
+                                        .routeTo(context, const MainActivityPage());
+                                  } else {
+                                    blocCentral.camera
+                                        .requestCameraPermission();
+                                  }
+                                }
+                              : null,
+                          child: const Text("Continuar"));
+                    }),
+              ],
+            ),
+          ),
+        ),
+
+        /// pumpkin head
+        ImageAssetPositionedWidget(
+            sizeAsset: sizeAsset, top: top, left: left, assetImage: assetImage)
+      ],
     );
   }
 }
@@ -127,9 +230,10 @@ class _DesktopVersion extends StatelessWidget {
                                                   .camera.isCameraGranted) {
                                                 blocCentral.router.routeTo(
                                                     context,
-                                                    MainActivityPage());
+                                                    const MainActivityPage());
                                               } else {
-                                                blocCentral.camera.requestCameraPermission();
+                                                blocCentral.camera
+                                                    .requestCameraPermission();
                                               }
                                             }
                                           : null,
