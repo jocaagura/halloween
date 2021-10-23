@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:halloween/ui/pages/finish_activity_page.dart';
+import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import '../../blocs/bloc_central.dart';
 import '../../helpers.dart';
@@ -67,7 +68,10 @@ class _MobileVersion extends StatelessWidget {
 
         /// Spider
         ImageAssetPositionedWidget(
-            sizeAsset: sizeAsset2, top: top, left: left2, assetImage: assetImage),
+            sizeAsset: sizeAsset2,
+            top: top,
+            left: left2,
+            assetImage: assetImage),
       ],
     );
   }
@@ -93,6 +97,7 @@ class _DesktopVersion extends StatelessWidget {
     final double top = size.height * 0.05;
     final double left = size.width * 0.5 - (sizeAsset * 0.5);
     final double left2 = size.width * 0.5 - (sizeAsset2 * 0.5);
+
     return Stack(
       children: [
         Center(
@@ -101,30 +106,37 @@ class _DesktopVersion extends StatelessWidget {
             width: width,
             height: height,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20.0),
-                border: Border.all(
-                  color: Theme.of(context).canvasColor,
-                  width: 2.0,
-                )),
-            child: InkWell(
-                onTap: () {
-                  blocCentral.router
-                      .routeTo(context, const FinishActivityPage());
-                },
-                child: const Text("Aqui reproducimos el video")),
+              borderRadius: BorderRadius.circular(20.0),
+              border: Border.all(
+                color: Theme.of(context).canvasColor,
+                width: 2.0,
+              ),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20.0),
+              child: YoutubePlayerIFrame(
+                controller: blocCentral.video.ytController,
+                aspectRatio: width / height,
+              ),
+            ),
           ),
         ),
 
         /// SpiderWeb
         ImageAssetPositionedWidget(
-            sizeAsset: sizeAsset2,
-            top: top,
-            left: left2,
-            assetImage: assetImage2),
+          sizeAsset: sizeAsset2,
+          top: top,
+          left: left2,
+          assetImage: assetImage2,
+        ),
 
         /// Spider
         ImageAssetPositionedWidget(
-            sizeAsset: sizeAsset, top: top * 2, left: left, assetImage: assetImage),
+          sizeAsset: sizeAsset,
+          top: top * 2,
+          left: left,
+          assetImage: assetImage,
+        ),
       ],
     );
   }
