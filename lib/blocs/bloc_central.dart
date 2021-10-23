@@ -4,6 +4,7 @@ import 'bloc_routing.dart';
 import 'bloc_sesion.dart';
 import 'bloc_size_screen.dart';
 import 'bloc_theme.dart';
+import 'bloc_video.dart';
 
 class BlocCentral extends Bloc {
   /// we use this bloc as dependency injector
@@ -13,6 +14,7 @@ class BlocCentral extends Bloc {
   final sesion = BlocSesion();
   final router = BlocRouting();
   final camera = BlocCamera();
+  final video = BlocVideo();
 }
 
 final blocCentral = BlocCentral();
