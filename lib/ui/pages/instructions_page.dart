@@ -104,20 +104,8 @@ class _MobileVersion extends StatelessWidget {
                 StreamBuilder<String>(
                     stream: blocCentral.sesion.sesionEmailStream,
                     builder: (context, snapshot) {
-                      String _email = snapshot.data ?? "";
                       return ElevatedButton(
-                          onPressed: validarEmail(_email)
-                              ? () {
-                                  if (blocCentral.camera.isCameraGranted) {
-                                    blocCentral.router
-                                        .routeTo(context, const MainActivityPage());
-                                  } else {
-                                    blocCentral.camera
-                                        .requestCameraPermission();
-                                  }
-                                }
-                              : null,
-                          child: const Text("Continuar"));
+                          onPressed: () {}, child: const Text("Continuar"));
                     }),
               ],
             ),
@@ -226,15 +214,9 @@ class _DesktopVersion extends StatelessWidget {
                                   return ElevatedButton(
                                       onPressed: validarEmail(_email)
                                           ? () {
-                                              if (blocCentral
-                                                  .camera.isCameraGranted) {
-                                                blocCentral.router.routeTo(
-                                                    context,
-                                                    const MainActivityPage());
-                                              } else {
-                                                blocCentral.camera
-                                                    .requestCameraPermission();
-                                              }
+                                              blocCentral.camera
+                                                  .requestCameraPermission(
+                                                      context);
                                             }
                                           : null,
                                       child: const Text("Continuar"));
