@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+
 import '../../blocs/bloc_central.dart';
 
 class SharedVideoButtonWidget extends StatelessWidget {
@@ -11,7 +14,7 @@ class SharedVideoButtonWidget extends StatelessWidget {
 
     final double sizeFont2 = (size.width * 0.012).clamp(8, 12);
     final TextStyle style =
-    TextStyle(fontSize: sizeFont2, color: blocCentral.theme.kColors.last);
+        TextStyle(fontSize: sizeFont2, color: blocCentral.theme.kColors.last);
     return Container(
       decoration: BoxDecoration(
           color: blocCentral.theme.kColors[0],
@@ -22,7 +25,12 @@ class SharedVideoButtonWidget extends StatelessWidget {
             return ElevatedButton(
                 onPressed: () {
                   debugPrint('Compartir');
-                  debugPrint(snapshot.data.toString());
+                  final xdata = snapshot.data;
+                  debugPrint(xdata.toString());
+                  if (xdata != null) {
+                    File videoPlay = File(xdata.path);
+                    debugPrint(videoPlay.uri.toString());
+                  }
                 },
                 child: Text(
                   "Compartir",
