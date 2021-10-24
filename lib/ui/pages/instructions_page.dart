@@ -100,12 +100,7 @@ class _MobileVersion extends StatelessWidget {
                 const SizedBox(
                   height: 10.0,
                 ),
-                StreamBuilder<String>(
-                    stream: blocCentral.sesion.sesionEmailStream,
-                    builder: (context, snapshot) {
-                      return ElevatedButton(
-                          onPressed: () {}, child: const Text("Continuar"));
-                    }),
+                const _ContinueButtonWidget(),
               ],
             ),
           ),
@@ -206,20 +201,7 @@ class _DesktopVersion extends StatelessWidget {
                             const SizedBox(
                               height: 10.0,
                             ),
-                            StreamBuilder<String>(
-                                stream: blocCentral.sesion.sesionEmailStream,
-                                builder: (context, snapshot) {
-                                  String _email = snapshot.data ?? "";
-                                  return ElevatedButton(
-                                      onPressed: validarEmail(_email)
-                                          ? () {
-                                              blocCentral.camera
-                                                  .requestCameraPermission(
-                                                      context);
-                                            }
-                                          : null,
-                                      child: const Text("Continuar"));
-                                })
+                            const _ContinueButtonWidget()
                           ],
                         )),
                   ],
@@ -234,5 +216,29 @@ class _DesktopVersion extends StatelessWidget {
             sizeAsset: sizeAsset, top: top, left: left, assetImage: assetImage)
       ],
     );
+  }
+}
+
+class _ContinueButtonWidget extends StatelessWidget {
+  const _ContinueButtonWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<String>(
+        stream: blocCentral.sesion.sesionEmailStream,
+        builder: (context, snapshot) {
+          String _email = snapshot.data ?? "";
+          return ElevatedButton(
+              onPressed: validarEmail(_email)
+                  ? () {
+                      blocCentral.camera
+                          .requestCameraPermission(
+                              context);
+                    }
+                  : null,
+              child: const Text("Continuar"));
+        });
   }
 }

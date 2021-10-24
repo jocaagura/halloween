@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:halloween/ui/pages/finish_activity_page.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import '../../blocs/bloc_central.dart';
@@ -50,12 +49,7 @@ class _MobileVersion extends StatelessWidget {
                   color: Theme.of(context).canvasColor,
                   width: 2.0,
                 )),
-            child: InkWell(
-                onTap: () {
-                  blocCentral.router
-                      .routeTo(context, const FinishActivityPage());
-                },
-                child: const Text("Aqui reproducimos el video")),
+            child: _VideoYoutubePlayer(width: width, height: height),
           ),
         ),
 
@@ -112,13 +106,7 @@ class _DesktopVersion extends StatelessWidget {
                 width: 2.0,
               ),
             ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20.0),
-              child: YoutubePlayerIFrame(
-                controller: blocCentral.video.ytController,
-                aspectRatio: width / height,
-              ),
-            ),
+            child: _VideoYoutubePlayer(width: width, height: height),
           ),
         ),
 
@@ -138,6 +126,28 @@ class _DesktopVersion extends StatelessWidget {
           assetImage: assetImage,
         ),
       ],
+    );
+  }
+}
+
+class _VideoYoutubePlayer extends StatelessWidget {
+  const _VideoYoutubePlayer({
+    Key? key,
+    required this.width,
+    required this.height,
+  }) : super(key: key);
+
+  final double width;
+  final double height;
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(20.0),
+      child: YoutubePlayerIFrame(
+        controller: blocCentral.video.ytController,
+        aspectRatio: width / height,
+      ),
     );
   }
 }
