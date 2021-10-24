@@ -60,18 +60,7 @@ class _MobileVersion extends StatelessWidget {
               SizedBox(
                 height: height * 0.125,
               ),
-              Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.0),
-                    border: Border.all(color: blocCentral.theme.kColors.last)),
-                width: width * 0.9,
-                alignment: Alignment.center,
-                height: height * 0.45,
-                child: const Text(
-                  "Reproducir",
-                  textAlign: TextAlign.center,
-                ),
-              ),
+              PreviewVideoPlayerWidget(width: width * 0.9, height: height * 0.45),
               Container(
                 width: width * 0.9,
                 height: height * 0.3,
@@ -115,15 +104,7 @@ class _MobileVersion extends StatelessWidget {
                       decoration: BoxDecoration(
                           color: blocCentral.theme.kColors[0],
                           borderRadius: BorderRadius.circular(5.0)),
-                      child: ElevatedButton(
-                          onPressed: () {
-                            /// todo funcion de compartir con el copy designado
-                            debugPrint('Compartir');
-                          },
-                          child: Text(
-                            "Compartir",
-                            style: style,
-                          )),
+                      child: SharedVideoButtonWidget(),
                     ),
                     const SizedBox(
                       height: 5.0,
