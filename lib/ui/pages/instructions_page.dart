@@ -4,7 +4,6 @@ import '../../blocs/bloc_central.dart';
 import '../../helpers.dart';
 import '../widgets/image_asset_positioned_widget.dart';
 import '../widgets/responsive_widget.dart';
-import 'main_activity_page.dart';
 
 class InstructionsPage extends StatelessWidget {
   const InstructionsPage({Key? key}) : super(key: key);

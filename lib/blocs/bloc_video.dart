@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:halloween/ui/pages/finish_activity_page.dart';
 import 'package:video_player/video_player.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import '../entities.dart';
+import '../ui/pages/finish_activity_page.dart';
 import 'bloc_central.dart';
 
 class BlocVideo extends Bloc {

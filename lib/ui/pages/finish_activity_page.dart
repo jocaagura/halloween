@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:share_plus/share_plus.dart';
 
 import '../../blocs/bloc_central.dart';
 import '../../helpers.dart';
 import '../widgets/image_asset_positioned_widget.dart';
 import '../widgets/info_tab_widget.dart';
+import '../widgets/preview_video_player_widget.dart';
 import '../widgets/responsive_widget.dart';
+import '../widgets/shared_video_button_widget.dart';
 
 class FinishActivityPage extends StatelessWidget {
   const FinishActivityPage({Key? key}) : super(key: key);
@@ -117,7 +118,7 @@ class _MobileVersion extends StatelessWidget {
                       child: ElevatedButton(
                           onPressed: () {
                             /// todo funcion de compartir con el copy designado
-                            print('Compartir');
+                            debugPrint('Compartir');
                           },
                           child: Text(
                             "Compartir",
@@ -222,18 +223,8 @@ class _DesktopVersion extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.0),
-                        border:
-                            Border.all(color: blocCentral.theme.kColors.last)),
-                    width: width * 0.49,
-                    height: height * 0.4,
-                    child: const Text(
-                      "Reproducir",
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
+                  PreviewVideoPlayerWidget(
+                      width: width * 0.49, height: height * 0.4),
                   SizedBox(
                     width: width * 0.49,
                     height: height * 0.25,
@@ -283,19 +274,7 @@ class _DesktopVersion extends StatelessWidget {
                   const SizedBox(
                     height: 10.0,
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                        color: blocCentral.theme.kColors[0],
-                        borderRadius: BorderRadius.circular(5.0)),
-                    child: ElevatedButton(
-                        onPressed: () {
-                          print('Compartir');
-                        },
-                        child: Text(
-                          "Compartir",
-                          style: style,
-                        )),
-                  ),
+                  SharedVideoButtonWidget(),
                   const SizedBox(
                     height: 10.0,
                   ),
