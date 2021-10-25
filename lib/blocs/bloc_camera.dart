@@ -32,6 +32,7 @@ class BlocCamera extends Bloc {
 
   Future<void> requestCameraPermission(BuildContext context) async {
     if (await _isCameraGranted()) {
+      blocCentral.video.initializeYTPlayerController();
       blocCentral.video.listenPlayerState(context);
       blocCentral.router.routeTo(context, const MainActivityPage());
     }
