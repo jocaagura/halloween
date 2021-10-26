@@ -56,7 +56,7 @@ class ServiceStorage {
 try{
     late Reference storageReference;
     String pathFirebase =
-        'pragmasa/$name.mkv';
+        'pragmasa/$name.mp4';
     storageReference =
         FirebaseStorage.instance.ref().child("videos/$pathFirebase");
 
