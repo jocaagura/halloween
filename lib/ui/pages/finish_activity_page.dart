@@ -104,7 +104,7 @@ class _MobileVersion extends StatelessWidget {
                       decoration: BoxDecoration(
                           color: blocCentral.theme.kColors[0],
                           borderRadius: BorderRadius.circular(5.0)),
-                      child: SharedVideoButtonWidget(),
+                      child: const SharedVideoButtonWidget(),
                     ),
                     const SizedBox(
                       height: 5.0,
@@ -255,7 +255,7 @@ class _DesktopVersion extends StatelessWidget {
                   const SizedBox(
                     height: 10.0,
                   ),
-                  SharedVideoButtonWidget(),
+                  const SharedVideoButtonWidget(),
                   const SizedBox(
                     height: 10.0,
                   ),

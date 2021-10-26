@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'dart:math';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:video_player/video_player.dart';
+import 'package:halloween/models/model_storage.dart';
+import 'package:halloween/services/service_storage.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import '../entities.dart';
@@ -15,10 +17,26 @@ class BlocVideo extends Bloc {
     'HM-E5r6B_tU',
     '6tg_x9i6wR0',
   ];
-
   late YoutubePlayerController ytController;
+  static const _kStorageModel = "video";
 
-  VideoPlayerController? _fileVideoController;
+  BlocVideo() {
+    addStreamController<String, ModelStorage>(_kStorageModel, ModelStorage());
+  }
+
+  Stream<ModelStorage?> get videoStream =>
+      getStream(_kStorageModel) as Stream<ModelStorage?>;
+
+  final ytController = YoutubePlayerController(
+    initialVideoId: 'COd37qgfwcc',
+    params: const YoutubePlayerParams(
+      autoPlay: true,
+      desktopMode: true,
+      enableKeyboard: false,
+      showControls: false,
+      showVideoAnnotations: false,
+    ),
+  );
   StreamSubscription<dynamic>? _subscription;
   Future<void>? _fileVideoInitialized;
   final _random = Random();
@@ -64,6 +82,25 @@ class BlocVideo extends Bloc {
         mimeType: ${xFile.mimeType}
         name: ${xFile.name}
         ''');
+        // Creamos el modelo para guardado en la base de datos
+
+        final ModelStorage videoStorage = ModelStorage(
+          file: File(xFile.path),
+          fileName: blocCentral.sesion.sesionEmail,
+          fileType: "video",
+          propietario: "pragma_sa",
+          size: 1000,
+        );
+
+        debugPrint("${videoStorage.toJson()}");
+        setValue<ModelStorage>(_kStorageModel, videoStorage);
+
+        ServiceStorage.saveVideo(xFile, blocCentral.sesion.sesionEmail)
+            .then((value) {
+          debugPrint("Salvado en firebase");
+          setValue<ModelStorage>(_kStorageModel, value);
+        });
+
         blocCentral.router.routeTo(context, const FinishActivityPage());
       }
     });
