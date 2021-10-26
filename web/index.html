@@ -18,7 +18,31 @@
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
-  <script>
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-storage.js"></script>
+<script>
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBEQbBjhLnO0BConOmENBbHwITl9_V3kik",
+  authDomain: "pragma-bf026.firebaseapp.com",
+  projectId: "pragma-bf026",
+  storageBucket: "pragma-bf026.appspot.com",
+  messagingSenderId: "963662617117",
+  appId: "1:963662617117:web:1fbb60c127bc6d12d484f4",
+  measurementId: "G-402DHLZ893"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+</script>
+
+
+
+
+
+
+<script>
     var serviceWorkerVersion = null;
     var scriptLoaded = false;
     function loadMainDartJs() {

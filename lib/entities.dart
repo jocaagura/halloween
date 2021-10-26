@@ -12,7 +12,7 @@ abstract class Bloc {
   }
 
   removeStreamController(String key) {
-    if (_streamControllers[key] == null) {
+    if (_streamControllers[key] != null) {
       _streamControllers[key]?.close();
       _streamControllers.remove(key);
     }

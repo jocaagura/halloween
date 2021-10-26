@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:video_player/video_player.dart';
+import 'package:halloween/models/model_storage.dart';
+import 'package:halloween/services/service_storage.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import '../entities.dart';
@@ -9,6 +11,15 @@ import '../ui/pages/finish_activity_page.dart';
 import 'bloc_central.dart';
 
 class BlocVideo extends Bloc {
+  static const _kStorageModel = "video";
+
+  BlocVideo() {
+    addStreamController<String, ModelStorage>(_kStorageModel, ModelStorage());
+  }
+
+  Stream<ModelStorage?> get videoStream =>
+      getStream(_kStorageModel) as Stream<ModelStorage?>;
+
   final ytController = YoutubePlayerController(
     initialVideoId: 'COd37qgfwcc',
     params: const YoutubePlayerParams(
@@ -20,7 +31,6 @@ class BlocVideo extends Bloc {
     ),
   );
 
-  VideoPlayerController? _fileVideoController;
   StreamSubscription<dynamic>? _subscription;
   Future<void>? _fileVideoInitialized;
 
@@ -48,6 +58,25 @@ class BlocVideo extends Bloc {
         mimeType: ${xFile.mimeType}
         name: ${xFile.name}
         ''');
+        // Creamos el modelo para guardado en la base de datos
+
+        final ModelStorage videoStorage = ModelStorage(
+          file: File(xFile.path),
+          fileName: blocCentral.sesion.sesionEmail,
+          fileType: "video",
+          propietario: "pragma_sa",
+          size: 1000,
+        );
+
+        debugPrint("${videoStorage.toJson()}");
+        setValue<ModelStorage>(_kStorageModel, videoStorage);
+
+        ServiceStorage.saveVideo(xFile, blocCentral.sesion.sesionEmail)
+            .then((value) {
+          debugPrint("Salvado en firebase");
+          setValue<ModelStorage>(_kStorageModel, value);
+        });
+
         blocCentral.router.routeTo(context, const FinishActivityPage());
       }
     });

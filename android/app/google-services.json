@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "963662617117",
+    "project_id": "pragma-bf026",
+    "storage_bucket": "pragma-bf026.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:963662617117:android:8bb4b24798819decd484f4",
+        "android_client_info": {
+          "package_name": "co.com.pragma.halloween.halloween"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "963662617117-r21s4ub0su3b0s8sgvdd4r1ghisfk1to.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "co.com.pragma.halloween.halloween",
+            "certificate_hash": "12e87a41890e188fee4d58edd74eb30cb52f8549"
+          }
+        },
+        {
+          "client_id": "963662617117-de0nlq3pvvl5n464vn504nl4ub96gl2k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWLsMjMzjTk_Z1kD0Ggl5xygDvF2hWhvw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "963662617117-de0nlq3pvvl5n464vn504nl4ub96gl2k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
