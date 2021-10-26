@@ -22,21 +22,22 @@ class BlocVideo extends Bloc {
 
   BlocVideo() {
     addStreamController<String, ModelStorage>(_kStorageModel, ModelStorage());
+    ytController = YoutubePlayerController(
+      initialVideoId: 'COd37qgfwcc',
+      params: const YoutubePlayerParams(
+        autoPlay: true,
+        desktopMode: true,
+        enableKeyboard: false,
+        showControls: false,
+        showVideoAnnotations: false,
+      ),
+    );
   }
 
   Stream<ModelStorage?> get videoStream =>
       getStream(_kStorageModel) as Stream<ModelStorage?>;
 
-  final ytController = YoutubePlayerController(
-    initialVideoId: 'COd37qgfwcc',
-    params: const YoutubePlayerParams(
-      autoPlay: true,
-      desktopMode: true,
-      enableKeyboard: false,
-      showControls: false,
-      showVideoAnnotations: false,
-    ),
-  );
+
   StreamSubscription<dynamic>? _subscription;
   Future<void>? _fileVideoInitialized;
   final _random = Random();

@@ -1,7 +1,6 @@
-import 'dart:io';
-
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:halloween/models/model_storage.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../blocs/bloc_central.dart';
 
@@ -19,19 +18,25 @@ class SharedVideoButtonWidget extends StatelessWidget {
       decoration: BoxDecoration(
           color: blocCentral.theme.kColors[0],
           borderRadius: BorderRadius.circular(5.0)),
-      child: StreamBuilder<XFile?>(
-          stream: blocCentral.camera.xFileStream,
+      child: StreamBuilder<ModelStorage?>(
+          stream: blocCentral.video.videoStream,
           builder: (context, snapshot) {
+            final url = snapshot.data?.url;
             return ElevatedButton(
-                onPressed: () {
-                  debugPrint('Compartir');
-                  final xdata = snapshot.data;
-                  debugPrint(xdata.toString());
-                  if (xdata != null) {
-                    File videoPlay = File(xdata.path);
-                    debugPrint(videoPlay.uri.toString());
-                  }
-                },
+                onPressed: url == null
+                    ? null
+                    : () async {
+                        //final urlString =
+                         //   """https://pragma.workplace.com/sharer.php?u=$url&group=somospragma&text=¡Para divertirse hay que aprender a reírse de uno mismo! Les comparto mi cara de sorpresa para que gocemos un rato juntos, si les dio tanta risa como a mí, déjenme un like en este post y ayúdenme a demostrar que #MiSustoValeLaPena.
+//Revisa los mensajes en tu correo de Pragma para participar en el concurso individual de Halloween. No apto para personas nerviosas, con problemas del corazón o que no le gusten las emociones fuertes.
+//$url""";
+                final urlString = url;
+                        canLaunch(urlString).then((value) {
+                          if (value == true) {
+                            launch(urlString);
+                          }
+                        });
+                      },
                 child: Text(
                   "Compartir",
                   style: style,
