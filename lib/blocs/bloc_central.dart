@@ -6,9 +6,9 @@ import 'bloc_size_screen.dart';
 import 'bloc_theme.dart';
 import 'bloc_video.dart';
 
-class BlocCentral extends Bloc {
+class BlocCentral extends Injector {
   /// we use this bloc as dependency injector
-  /// this bloc only can be intanciated once in the app
+  /// this [BlocCentral] only would be intanciated once in the app
   final theme = BlocTheme();
   final size = BlocSize();
   final sesion = BlocSesion();
