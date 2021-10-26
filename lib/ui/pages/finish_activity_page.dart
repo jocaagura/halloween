@@ -71,22 +71,13 @@ class _MobileVersion extends StatelessWidget {
                   children: [
                     InfoTabWidget(
                         text: "¡Tu reacción fue increible!", style: styleTitle),
-                    const SizedBox(
-                      height: 5.0,
-                    ),
                     InfoTabWidget(
                         text: "Mirala de nuevo para reirte con nosotros.",
                         style: style),
-                    const SizedBox(
-                      height: 5.0,
-                    ),
                     InfoTabWidget(
                       text:
                           "Para participar por el bono, debes publicar el video de tu susto en el grupo Somos Pragma en Workplace con la etiqueta #MiSustoValeLaPena.",
                       style: style,
-                    ),
-                    const SizedBox(
-                      height: 5.0,
                     ),
                     InfoTabWidget(
                       text: "Las 2 publicaciones con más likes.",
@@ -106,9 +97,6 @@ class _MobileVersion extends StatelessWidget {
                           borderRadius: BorderRadius.circular(5.0)),
                       child: const SharedVideoButtonWidget(),
                     ),
-                    const SizedBox(
-                      height: 5.0,
-                    )
                   ],
                 ),
               ),

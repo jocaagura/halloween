@@ -106,4 +106,8 @@ class BlocVideo extends Bloc {
       }
     });
   }
+
+  addUrlToStream(String url){
+    setValue(_kStorageModel, ModelStorage(fileName: 'Test', url: url));
+  }
 }
