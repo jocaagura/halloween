@@ -38,7 +38,7 @@ class SharedVideoButtonWidget extends StatelessWidget {
                         });
                       },
                 child: Text(
-                  "Compartir",
+                  "Descargar",
                   style: style,
                 ));
           }),

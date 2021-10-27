@@ -48,6 +48,7 @@ class _PreviewVideoPlayerWidgetState extends State<PreviewVideoPlayerWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final double iconSize = widget.height * 0.1;
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.0),
@@ -55,11 +56,40 @@ class _PreviewVideoPlayerWidgetState extends State<PreviewVideoPlayerWidget> {
       width: widget.width,
       height: widget.height,
       alignment: Alignment.center,
-      child: ClipRRect(
-          borderRadius: BorderRadius.circular(8.0),
-          child: (videoController?.value.isInitialized == true)
-              ? VideoPlayer(videoController!)
-              : const CircularProgressIndicator()),
+      child: Column(
+        children: [
+          Expanded(
+            child: ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: videoController == null
+                    ? const Center(child: CircularProgressIndicator())
+                    : VideoPlayer(videoController!)),
+          ),
+          SizedBox(
+            width: widget.width,
+            height: iconSize,
+            child: videoController?.value.isPlaying == true
+                ? MaterialButton(
+                    onPressed: () {
+                      _stopVideo();
+                    },
+                    child: Icon(
+                      Icons.stop,
+                      size: iconSize,
+                      color: blocCentral.theme.kColors.last,
+                    ))
+                : MaterialButton(
+                    onPressed: () {
+                      _playVideo();
+                    },
+                    child: Icon(
+                      Icons.play_arrow,
+                      size: iconSize,
+                      color: blocCentral.theme.kColors.last,
+                    )),
+          )
+        ],
+      ),
     );
   }
 
@@ -68,21 +98,22 @@ class _PreviewVideoPlayerWidgetState extends State<PreviewVideoPlayerWidget> {
       ..initialize().then((_) async {
         // Ensure the first frame is shown after the video is initialized,
         // even before the play button has been pressed.
-        setState(() {
-          _playVideo();
-        });
+        setState(() {});
+        await Future.delayed(const Duration(milliseconds: 100));
+
+        _playVideo();
       });
   }
 
   _playVideo() async {
-    if (videoController?.value.isInitialized != true) {
-      await Future.delayed(const Duration(seconds: 1));
-    }
+    await Future.delayed(const Duration(seconds: 1));
     await videoController!.play();
+    setState(() {});
+  }
 
-    if (videoController?.value.isInitialized == true) {
-      setState(() {});
-      await videoController!.play();
-    }
+  _stopVideo() async {
+    videoController?.pause();
+    await videoController?.seekTo(const Duration(milliseconds: 0));
+    setState(() {});
   }
 }

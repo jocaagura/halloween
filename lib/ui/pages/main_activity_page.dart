@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
@@ -111,19 +112,27 @@ class _DesktopVersion extends StatelessWidget {
         ),
 
         /// SpiderWeb
-        ImageAssetPositionedWidget(
-          sizeAsset: sizeAsset2,
-          top: top,
-          left: left2,
-          assetImage: assetImage2,
+        Bounce(
+          duration: const Duration(milliseconds: 2250),
+          infinite: true,
+          from: 10.0,
+          child: ImageAssetPositionedWidget(
+            sizeAsset: sizeAsset2,
+            top: top,
+            left: left2,
+            assetImage: assetImage2,
+          ),
         ),
 
         /// Spider
-        ImageAssetPositionedWidget(
-          sizeAsset: sizeAsset,
-          top: top * 2,
-          left: left,
-          assetImage: assetImage,
+        ZoomIn(
+          duration: const Duration(milliseconds: 250),
+          child: ImageAssetPositionedWidget(
+            sizeAsset: sizeAsset,
+            top: top * 2,
+            left: left,
+            assetImage: assetImage,
+          ),
         ),
       ],
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:halloween/models/model_storage.dart';
 
 import '../../blocs/bloc_central.dart';
 import '../../helpers.dart';
@@ -10,7 +11,6 @@ import '../widgets/shared_video_button_widget.dart';
 
 class FinishActivityPage extends StatelessWidget {
   const FinishActivityPage({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return const ResponsiveWidget(
@@ -60,7 +60,8 @@ class _MobileVersion extends StatelessWidget {
               SizedBox(
                 height: height * 0.125,
               ),
-              PreviewVideoPlayerWidget(width: width * 0.9, height: height * 0.45),
+              PreviewVideoPlayerWidget(
+                  width: width * 0.9, height: height * 0.45),
               Container(
                 width: width * 0.9,
                 height: height * 0.3,
@@ -192,8 +193,22 @@ class _DesktopVersion extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  PreviewVideoPlayerWidget(
-                      width: width * 0.49, height: height * 0.4),
+                  SizedBox(
+                    width:  width * 0.49,
+                    height: height * 0.4,
+                    child: StreamBuilder<ModelStorage?>(
+                        stream: blocCentral.video.videoStream,
+                        builder: (context, snapshot) {
+                          final url = snapshot.data?.url;
+                          if (url == null) {
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          }
+
+                          return PreviewVideoPlayerWidget(
+                              width: width * 0.49, height: height * 0.4);
+                        }),
+                  ),
                   SizedBox(
                     width: width * 0.49,
                     height: height * 0.25,

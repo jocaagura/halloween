@@ -13,9 +13,9 @@ import 'bloc_central.dart';
 
 class BlocVideo extends Bloc {
   static const _videos = [
-    'DRnVhi5fsIw',
-    'HM-E5r6B_tU',
-    '6tg_x9i6wR0',
+    'FUQhNGEu2KA',
+    'zXNcIbmWM2w',
+    'l4SFiMrYplM',
   ];
   late YoutubePlayerController ytController;
   static const _kStorageModel = "video";

@@ -179,19 +179,18 @@ class _DesktopVersion extends StatelessWidget {
                               style: style,
                               textAlign: TextAlign.center,
                             ),
-                            const SizedBox(
-                              height: 5.0,
-                            ),
                             Text(
                               "2. Cuando estes listo presiona continuar.",
                               style: style,
                               textAlign: TextAlign.center,
                             ),
-                            const SizedBox(
-                              height: 5.0,
+                            Text(
+                              "3. Ponte tus audífonos y asegúrate de que el sonido esté funcionando bien.",
+                              style: style,
+                              textAlign: TextAlign.center,
                             ),
                             Text(
-                              "3. No necesitas más instrucciones solo sigue tu instinto.",
+                              "4. No necesitas más instrucciones solo sigue tu instinto.",
                               style: style,
                               textAlign: TextAlign.center,
                             ),
